@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="m-ujPtjce2BMff1K5dfZ" name="Page-1">
-        <mxGraphModel dx="954" dy="546" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="954" dy="1068" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -43,7 +43,7 @@
                 <mxCell id="16" value="Return to Hub" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#647687;sketch=1;fontSize=23;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
                     <mxGeometry x="425" y="600" width="175" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="Info" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#647687;sketch=1;fontSize=23;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
+                <mxCell id="17" value="info" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#647687;sketch=1;fontSize=23;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
                     <mxGeometry x="170" y="520" width="120" height="40" as="geometry"/>
                 </mxCell>
             </root>
