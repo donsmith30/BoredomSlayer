@@ -1,0 +1,19 @@
+<mxfile host="65bd71144e">
+    <diagram id="CJJBDJ8T0S_51AwF9nWt" name="Page-1">
+        <mxGraphModel dx="636" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="130" width="250" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Avatar created/generated &lt;br style=&quot;font-size: 14px;&quot;&gt;here" style="whiteSpace=wrap;html=1;aspect=fixed;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="180" width="130" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Enter the Hub" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#647687;sketch=1;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="1">
+                    <mxGeometry x="365" y="330" width="120" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
