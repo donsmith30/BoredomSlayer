@@ -36,81 +36,89 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <div class="container">
-      <div class="row first_row">
-        <h3>Rock, Paper, Scissors</h3>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row row-12">
-        <div class="col col-4 second_row">
-          <button
-            id="instruct"
-            type="button"
-            class="btn btn-sm btn-secondary"
-            data-bs-container="body"
-            data-bs-toggle="popover"
-            data-bs-placement="top"
-            data-bs-content="Press 'Start Game'. You will be given 5 seconds to make a selection for each round. At the end of the round, your selection is compared to the computer's. Best 2 out of 3 rounds wins the match."
-          >
-            Instructions
-          </button>
-        </div>
-        <div class="col col-4 second_row">
-          <p>Round: <span id="round_count">0</span></p>
-        </div>
-        <div class="col col-4 second_row">
-          <button id="start_game" class="btn btn-success btn-sm">
-            Start Game
-          </button>
+  <body onload="startUp()">
+    <div class="container main_container">
+      <div class="container">
+        <div class="row first_row">
+          <h3>Rock, Paper, Scissors</h3>
         </div>
       </div>
+      <div class="container">
+        <div class="row row-12">
+          <div class="col col-4 second_row">
+            <button
+              id="instruct"
+              type="button"
+              class="btn btn-sm btn-secondary"
+              data-bs-container="body"
+              data-bs-toggle="popover"
+              data-bs-placement="top"
+              data-bs-content="Press 'Start Game'. You will be given 5 seconds to make a selection from the images below 
+              for each round. At the end of the round, your selection is compared to the computer's. Best 2 out of 3 rounds wins 
+              the match. May the odds forever be in your favor."
+            >
+              Instructions
+            </button>
+          </div>
+          <div class="col col-4 second_row">
+            <h5>Round: <span id="round_count">0</span></h5>
+          </div>
+          <div class="col col-4 second_row">
+            <button id="start_game" class="btn btn-success btn-sm">
+              Start Game
+            </button>
+          </div>
+        </div>
 
-      <div class="row row-12 third_row">
-        <p>Wins/Losses</p>
-        <p>
-          Computer: <span id="computer_wins" class="span">0</span>/
-          <span id="computer_losses" class="span">0</span>
-        </p>
-        <p>
-          Player: <span id="player_wins" class="span">0</span>
-          /
-          <span id="player_losses" class="span">0</span>
-        </p>
-      </div>
+        <div class="row row-12 third_row">
+          <p>Wins/Losses</p>
+          <p>
+            Computer: <span id="computer_wins" class="span">0</span>/
+            <span id="computer_losses" class="span">0</span>
+          </p>
+          <p>
+            Player: <span id="player_wins" class="span">0</span>
+            /
+            <span id="player_losses" class="span">0</span>
+          </p>
+        </div>
 
-      <div class="row row-12 fourth_row">
-        <p style="color: red">Time to Choose: <span id="timer"></span></p>
-      </div>
+        <div class="row row-12 fourth_row">
+          <p>Time to Next Round: <span id="round_timer">3</span></p>
+          <p style="color: red">Time to Choose: <span id="timer">5.00</span></p>
+        </div>
 
-      <div class="row row-12">
-        <div class="col col-4 fifth_row">
-          <img
-            src="gonRock.jpg"
-            style="height: 100px; max-width: 100px"
-            alt="rock"
-          />
-        </div>
-        <div class="col col-4 fifth_row">
-          <img
-            src="animePaper (2).jpg"
-            style="height: 100px; max-width: 100px"
-            alt="rock"
-          />
-        </div>
-        <div class="col col-4 fifth_row">
-          <img
-            src="animeScissors.jpg"
-            style="height: 100px; max-width: 100px"
-            alt="rock"
-          />
+        <div class="row row-12">
+          <div class="col col-4 fifth_row">
+            <img
+              id="1"
+              src="gonRock.jpg"
+              style="height: 100px; max-width: 100px"
+              alt="rock"
+            />
+          </div>
+          <div class="col col-4 fifth_row">
+            <img
+              id="2"
+              src="animePaper (2).jpg"
+              style="height: 100px; max-width: 100px"
+              alt="rock"
+            />
+          </div>
+          <div class="col col-4 fifth_row">
+            <img
+              id="3"
+              src="animeScissors.jpg"
+              style="height: 100px; max-width: 100px"
+              alt="rock"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="row sixth_row">
-        <button class="btn btn-danger">Return to Main Menu</button>
+      <div class="container">
+        <div class="row sixth_row">
+          <button class="btn btn-danger">Return to Main Menu</button>
+        </div>
       </div>
     </div>
     <!-- Bootstrap JS -->
