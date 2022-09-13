@@ -1,0 +1,71 @@
+body {
+    font-family: "Goldman";
+    font-size: xx-small;
+    background-image: url("https://bit.ly/3qw4z7M");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.span {
+    width: fit-content;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+}
+
+.row {
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+    margin: 2px 0 2px 0;
+    min-height: 25px;
+    height: fit-content;
+}
+
+p {
+    text-align: center;
+    margin: 0;
+}
+
+.btn {
+    font-size: 10px;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+}
+
+.first_row {
+    border: 5px solid red;
+    text-align: center;
+}
+
+.second_row {
+    border: 1px solid aqua;
+    justify-content: space-evenly;
+}
+
+.third_row {
+    border: 5px solid black;
+    flex-wrap: wrap;
+}
+
+.fourth_row {
+    border: 5px solid yellow;
+}
+
+.fifth_row {
+    border: 1px solid green;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.sixth_row {
+    border: 5px solid violet;
+}
