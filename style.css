@@ -53,3 +53,9 @@ iframe {
   background-size: cover;
   background-position: center;
 }
+
+.lights {
+  background-image: url("https://images.unsplash.com/photo-1507494924047-60b8ee826ca9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGZsYXNoaW5nJTIwbGlnaHRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60");
+  background-size: cover;
+  background-position: center;
+}
