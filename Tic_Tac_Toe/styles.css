@@ -1,10 +1,15 @@
+:root{
+  --orange:orange;
+  --three_in_line:pink;
+}
 section{
   text-align: center;
 }
-.option-btns{
+.lastBtn{
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .container{
@@ -20,6 +25,6 @@ td {
   color: red;
   text-align: center;
 }
-#table {
+#game-board {
   border-radius: 9px;
 }
