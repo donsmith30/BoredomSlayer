@@ -14,6 +14,7 @@ let shuffledArray = [];
 const triviaArray = [];
 let setNum = 0;
 triviaQuestions = [];
+let playerPoints = 0;
 
 async function getTrivia() {
   let url = `https://the-trivia-api.com/api/questions?categories=${category}&limit=${limit}&region=US&difficulty=${difficulty}`;
@@ -38,8 +39,21 @@ function newRound() {
     buildTrivia(setNum);
     setNum++;
   } else {
-    alert("GOOD GAME!");
+    var winPercent = (playerPoints / limit) * 100;
+    if (winPercent >= 70) {
+      setEndgameModal("Winner", "You win!");
+      alert(`${winPercent}! GOOD GAME!`);
+    } else {
+      setEndgameModal("loser", "You lose!");
+      alert(`${winPercent}! BAD GAME!`);
+    }
+    setNum = 0;
+    playerPoints = 0;
   }
+}
+
+function setEndgameModal(query, text) {
+  tenorService.grabData(query, text);
 }
 
 async function buildQuestion(setNum) {
@@ -99,6 +113,7 @@ document.getElementById("game_container").addEventListener("click", (evt) => {
     const userChoice = clickedElement.getAttribute("value");
     if (userChoice === correctAnswer) {
       alert("winner");
+      playerPoints++;
       //load up more qs
     } else {
       alert(`you are wrong, it was ${correctAnswer}`);
