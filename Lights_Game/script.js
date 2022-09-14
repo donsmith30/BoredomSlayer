@@ -1,3 +1,6 @@
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
 let numOfTurns = '';
 
 function startUp() {
@@ -54,29 +57,42 @@ function compTurn() {
 
 function onUserClick(e) {
     if(compArr.length >= 1) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    const divClicked = this.id;
-    flash(divClicked);
-    userArr.push(divClicked);
-    console.log(userArr);
-    if(userArr.length === compArr.length){
-        if(compArr.join() === userArr.join()){
-            if(userArr.length === numOfTurns) {
-                alert("YOU WIN!!");
-                onStopGame();
-            } 
-            else {
-                userArr = [];
-                setTimeout(compTurn, 2000);
-            }
-        }
-        else {
-            alert("You lose");
-            onStopGame();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const divClicked = this.id;
+        flash(divClicked);
+        userArr.push(divClicked);
+        console.log(userArr);
+        if(userArr.length === compArr.length){
+            compareArrs();
         }
     }
 }
+
+function compareArrs() {
+    let tenorSearch = '';
+    let message = '';
+
+    if(compArr.join() === userArr.join()){
+        if(userArr.length === numOfTurns) {
+            tenorSearch = 'winning';
+            message = 'YOU WON!!';
+            setEndgameModal(tenorSearch, message);
+            
+            onStopGame();
+        } 
+        else {
+            userArr = [];
+            setTimeout(compTurn, 2000);
+        }
+    }
+    else {
+        tenorSearch = 'losing';
+        message = 'yOU lOsE!';
+        setEndgameModal(tenorSearch, message);
+        
+        onStopGame();
+    }
 }
 
 function flash(divId, i) {
@@ -95,4 +111,8 @@ function returnColor(divId, i) {
     if(i === (compArr.length -1)) {
         getRandom();
     }
+}
+
+function setEndgameModal(query, text) {
+    tenorService.grabData(query, text);
 }

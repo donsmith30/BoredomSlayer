@@ -26,11 +26,41 @@
     <!-- jQuery Google CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <!-- Tenor Services JS -->
+    <script src="../Services/tenorService.js"></script>
+
     <!-- My CSS -->
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body onload="startUp()">
     <div class="container container_white_space">
+      <!-- Modal2 -->
+      <div
+        class="modal fade"
+        id="template2"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content" style="align-items: center">
+            <div class="modal-body">
+              <img src="" alt="" id="modalImg2" />
+              <p id="modalSpan2"></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Play Again
+              </button>
+              <!-- <button type="button" class="btn btn-primary">Back to Main Menu</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
       <main>
         <section>
           <button id="start" type="button" class="btn btn-success">
