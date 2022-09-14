@@ -29,9 +29,12 @@ function wireUpButtons() {
 }
 
 function stop() {
-    compWinCount = 1;
-    stopClicked = true;
-    compWinRound();
+    if(roundTimerDone === true) {
+        compWinCount = 1;
+        userLossCount = 1;
+        stopClicked = true;
+        compWinRound();
+    }
 }
 
 function compTurn() {
@@ -112,24 +115,21 @@ function nextRound() {
 
         function roundCountdown() {
             if(stopClicked === false) {
-                if (timeLeft === -1) {
+                if(timeLeft === 0) {
                     clearInterval(timerId);
                     roundTimerDone = true;
+                    timerElem.text("SHOOT!");
                 }
-                else if(timeLeft == 3){
+                else if(timeLeft === 3){
                     timerElem.text("ROCK");
                     timeLeft--;
                 }
-                else if(timeLeft == 2) {
+                else if(timeLeft === 2) {
                     timerElem.text("PAPER");
                     timeLeft--;
                 }
-                else if(timeLeft == 1) {
+                else if(timeLeft === 1) {
                     timerElem.text("SCISSORS");
-                    timeLeft--;
-                }
-                else if(timeLeft == 0) {
-                    timerElem.text("SHOOT!")
                     timeLeft--;
                 }
                 else {
@@ -148,6 +148,7 @@ function nextRound() {
         userWinCount = 0;
         userLossCount = 0;
         stopClicked = false;
+        roundTimerDone = false;
         setScore();
         $('#start_game').prop('disabled', false);
         timerElem.text('');
@@ -173,92 +174,98 @@ function setScore() {
     $('#round_count').text(round);
 }
 
-async function compWinRound() {
+function compWinRound() {
     compWinCount++;
     userLossCount++;
     setScore();
 
-    let newPic = '';
+    let newSearch = '';
     let modalText = '';
-    const modalDiv = $('#template');
+    
     if(compChoice == 1) {
-        modalText = 'Round winner is Computer with ROCK'
-        newPic = await unsplashService.getPic("boulder").then(onGetPicSuccess).catch(onGetPicFail);
+        modalText = 'You lost this round against ROCK';
+        newSearch = 'crushed';
     }
     else if(compChoice == 2) {
-        modalText = 'Round winner is Computer with PAPER'
-        newPic = await unsplashService.getPic("origami").then(onGetPicSuccess).catch(onGetPicFail);
+        modalText = 'You lost this round against PAPER';
+        newSearch = 'paper overload';
     }
     else if(compChoice == 3) {
-        modalText = 'Round winner is Computer with SCISSORS'
-        newPic = await unsplashService.getPic("scissors").then(onGetPicSuccess).catch(onGetPicFail);
+        modalText = 'You lost this round against SCISSORS';
+        newSearch = 'giant scissors';
     }
-    modalDiv.find('img').attr('src', newPic);
-    modalDiv.find('#modalSpan').text(modalText);
-    modalDiv.modal('show');
-    setTimeout(function() {modalDiv.modal('hide')}, 3000);
+    if(stopClicked === false) {
+        setRoundModal(newSearch, modalText);
+        setTimeout(nextRound, 3500);
+    }
+    else {
+        setTimeout(nextRound, 50);
+    }
     
-    if(compWinCount === 2) {
-        const compWin = "YOU LOSE";
-        const sad = "loser";
-        setModal(sad, compWin);
-    }
-    // if(compWinCount === 2) {    // set these to the beginning of the if statements after linking Tenor
-    //     alert("You lose");
-    // }   
-
-    setTimeout(nextRound, 3500);
+    checkWinner();
 }
 
-async function userWinRound() {
+function userWinRound() {
     userWinCount++;
     compLoseCount++;
     setScore();
 
-    let newPic = '';
+    let newSearch = '';
     let modalText = '';
-    const modalDiv = $('#template');
+
     if(userChoice == 1) {
-        modalText = 'Round winner is the Player with ROCK'
-        newPic = await unsplashService.getPic("boulder").then(onGetPicSuccess).catch(onGetPicFail);
+        modalText = 'You won the round with ROCK';
+        newSearch = "giant boulder";
     }
     else if(userChoice == 2) {
-        modalText = 'Round winner is the Player with PAPER'
-        newPic = await unsplashService.getPic("origami").then(onGetPicSuccess).catch(onGetPicFail);
+        modalText = 'You won the round with PAPER';
+        newSearch = 'paper airplane';
     }
     else if(userChoice == 3) {
-        modalText = 'Round winner is the Player with SCISSORS'
-        newPic = await unsplashService.getPic("scissors").then(onGetPicSuccess).catch(onGetPicFail);
+        modalText = 'You won the round with SCISSORS';
+        newSearch = 'scissors cutting paper';
     }
-    modalDiv.find('img').attr('src', newPic);
-    modalDiv.find('#modalSpan').text(modalText);
-    modalDiv.modal('show');
-    setTimeout(function() {modalDiv.modal('hide')}, 3000);
-
-    if(userWinCount === 2) {
-        const userWin = "YOU WIN!!";
-        const happy = "excited";
-        setModal(happy, userWin);
-    }
-
-    // if(userWinCount === 2) {    // set these to the beginning of the if statements after linking Tenor
-    //     alert("You win");
-    // }
+    setRoundModal(newSearch, modalText);
+    checkWinner();
 
     setTimeout(nextRound, 3500);
 }
 
-function setModal(query, text) {
-    
-    tenorService.grabData(query, text);
-    // modalDiv.find('img').attr('src', newPic);
-    // modalDiv.find('#modalSpan').text(text);
-    // modalDiv.modal('show');
+function tieRound() {
+    let newSearch = 'tie';
+    let modalText = 'This round was a tie';
+    setRoundModal(newSearch, modalText);
+
+    setTimeout(nextRound, 3500);
 }
 
-function tieRound() {
-    alert('Tie round');
-    nextRound();
+function checkWinner() {
+    let tenorSearch = '';
+    let message = '';
+
+    if(userWinCount === 2) {
+        tenorSearch = 'excited';
+        message = 'YOU WON!!';
+    }
+    if(compWinCount === 2) {
+        tenorSearch = 'loser';
+        message = 'yOu LoST!!'
+    }
+    setTimeout(setEndgameModal, 3500, tenorSearch, message);
+}
+
+async function setRoundModal(query, message) {
+    const newPic = await unsplashService.getPic(query).then(onGetPicSuccess).catch(onGetPicFail);
+    const modalDiv = $('#template1');
+
+    modalDiv.find('img').attr('src', newPic);
+    modalDiv.find('#modalSpan1').text(message);
+    modalDiv.modal('show');
+    setTimeout(function() {modalDiv.modal('hide')}, 3000);
+}
+
+function setEndgameModal(query, text) {
+    tenorService.grabData(query, text);
 }
 
 const onGetPicFail = (err) => {

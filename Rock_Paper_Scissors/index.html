@@ -38,10 +38,10 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Unsplash Services JS-->
-    <script src="./unsplashService.js"></script>
+    <script src="../Services/unsplashService.js"></script>
 
     <!-- Tenor Services JS -->
-    <script src="./tenorService.js"></script>
+    <script src="../Services/tenorService.js"></script>
 
     <!-- My CSS -->
     <link rel="stylesheet" href="./style.css" />
@@ -51,10 +51,10 @@
       <div class="container">
         <div class="row first_row">
           <h3>Rock, Paper, Scissors</h3>
-          <!-- Modal -->
+          <!-- Modal1 -->
           <div
             class="modal fade"
-            id="template"
+            id="template1"
             tabindex="-1"
             role="dialog"
             aria-labelledby="exampleModalCenterTitle"
@@ -63,10 +63,38 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-body">
-                  <img src="" alt="" id="modalImg" />
-                  <p id="modalSpan"></p>
+                  <img src="" alt="" id="modalImg1" />
+                  <p id="modalSpan1"></p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal2 -->
+      <div
+        class="modal fade"
+        id="template2"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content" style="align-items: center">
+            <div class="modal-body">
+              <img src="" alt="" id="modalImg2" />
+              <p id="modalSpan2"></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Play Again
+              </button>
+              <!-- <button type="button" class="btn btn-primary">Back to Main Menu</button> -->
             </div>
           </div>
         </div>
@@ -145,7 +173,9 @@
       </div>
       <div class="container">
         <div class="row sixth_row">
-          <button id="stop_button" class="btn btn-danger">STOP</button>
+          <button id="stop_button" class="btn btn-danger">
+            STOP TIMER/FORFEIT MATCH
+          </button>
         </div>
       </div>
     </div>
