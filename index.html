@@ -34,21 +34,29 @@
         <!-- Camera element -->
         <div class="flicking-camera">
           <!-- Panels, class names are your choice -->
-          <div class="flicking-panel">
-            <router-link to="/rps" class="gameSelector">rps</router-link>
-          </div>
-          <div class="flicking-panel">
-            <router-link to="/ttt" class="gameSelector">ttt</router-link>
-          </div>
-
-          <div class="flicking-panel">
-            <router-link to="/mineSweep" class="gameSelector"
-              >mineSweep</router-link
+          <div class="flicking-panel rockPaperScissors">
+            <router-link to="/rps" class="gameSelector btn btn-sm btn-light"
+              >Rock Paper Scissors</router-link
             >
           </div>
-          <div class="flicking-panel">
-            <router-link to="/triviaLoad" class="gameSelector"
-              >triviaLoad</router-link
+          <div class="flicking-panel ticTacToe">
+            <router-link to="/ttt" class="gameSelector btn btn-sm btn-light"
+              >Tic Tac Toe</router-link
+            >
+          </div>
+
+          <div class="flicking-panel mineSweep">
+            <router-link
+              to="/mineSweep"
+              class="gameSelector btn btn-sm btn-light"
+              >Mine Sweeper</router-link
+            >
+          </div>
+          <div class="flicking-panel trivia">
+            <router-link
+              to="/triviaLoad"
+              class="gameSelector btn btn-sm btn-light"
+              >Trivia</router-link
             >
           </div>
         </div>
