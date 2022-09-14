@@ -19,3 +19,37 @@
   background-color: #f2a65e !important;
   color: #fff !important;
 }
+
+.ninja {
+  visibility: hidden;
+  display: none;
+}
+
+iframe {
+  height: 100vh;
+  width: 100vw;
+}
+
+.ticTacToe {
+  background-image: url("https://cdn.pixabay.com/photo/2017/07/31/21/45/toys-2561392_1280.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.trivia {
+  background-image: url("https://images.unsplash.com/photo-1570937943292-a574bd5bc722?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.rockPaperScissors {
+  background-image: url("https://images.unsplash.com/photo-1618214839021-3fbe98a597bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2062&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.mineSweep {
+  background-image: url("https://images.unsplash.com/photo-1469817582067-f479697809fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80");
+  background-size: cover;
+  background-position: center;
+}
