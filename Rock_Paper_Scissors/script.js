@@ -12,6 +12,7 @@ let userLossCount = 0;
 
 let playerWent = false;
 let stopClicked = false;
+let roundTimerDone = false;
 
 function startUp() {
     wireUpButtons();
@@ -70,8 +71,13 @@ function compTurn() {
 
 function userTurn(e) {
     e.preventDefault();
-    if(compChoice) {
-        userChoice = this.id;
+
+    if(compChoice && (roundTimerDone == true)) {
+        let imageClicked = this;
+        imageClicked.style.filter = "brightness(2)";
+        setTimeout(function() {imageClicked.style.filter = "brightness(1)"}, 500);
+
+        userChoice = imageClicked.id;
         playerWent = true;
     
         if(userChoice) {
@@ -87,7 +93,7 @@ function userTurn(e) {
             compChoice = '';
         }
     }
-    
+    roundTimerDone = false;
 }
 
 function nextRound() {
@@ -108,6 +114,7 @@ function nextRound() {
             if(stopClicked === false) {
                 if (timeLeft === -1) {
                     clearInterval(timerId);
+                    roundTimerDone = true;
                 }
                 else if(timeLeft == 3){
                     timerElem.text("ROCK");
