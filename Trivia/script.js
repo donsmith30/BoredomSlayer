@@ -5,47 +5,68 @@ const popoverList = [...popoverTriggerList].map(
   (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
 );
 
-const url = `https://the-trivia-api.com/api/questions?categories=film_and_tv&limit=1&region=US&difficulty=easy`;
+//global vars
+let correctAnswer = "";
+let limit = 1;
+let category = [];
+let difficulty = "hard";
+let shuffledArray = [];
+const triviaArray = [];
+let setNum = 0;
+triviaQuestions = [];
 
 async function getTrivia() {
-  let response = await fetch(url);
-  let data = await response.json();
-  return data;
+  let url = `https://the-trivia-api.com/api/questions?categories=${category}&limit=${limit}&region=US&difficulty=${difficulty}`;
+  const response = await fetch(url);
+  const loadApi = await response.json();
+  triviaQuestions = [...loadApi];
 }
 
-let correctAnswer = "";
+async function playGame() {
+  const result = await getTrivia();
+  newRound();
+}
 
-document
-  .getElementById("newQuestion")
-  .addEventListener("click", async (evt) => {
-    evt.preventDefault();
-    getTrivia().then((data) => {
-      buildTrivia(data);
-      correctAnswer = data[0].correctAnswer;
-    });
-  });
+document.getElementById("newGame").addEventListener("click", () => {
+  ninjaToggle();
+});
 
-//getTrivia().then((data) => `${data[0].question} ${data[0].incorrectAnswers[0]} ${data[0].correctAnswer} ${data[0].incorrectAnswers[1]} ${data[0].incorrectAnswers[2]}`)
-function setGameRules() {}
+function newRound() {
+  if (setNum < limit) {
+    buildResponseArray(setNum);
+    buildQuestion(setNum);
+    buildTrivia(setNum);
+    setNum++;
+  } else {
+    alert("GOOD GAME!");
+  }
+}
 
-function buildTrivia(data) {
+async function buildQuestion(setNum) {
+  triviaQ = triviaQuestions[setNum].question;
+}
+
+async function buildResponseArray(setNum) {
+  const array = [
+    triviaQuestions[setNum].incorrectAnswers[0],
+    triviaQuestions[setNum].incorrectAnswers[1],
+    triviaQuestions[setNum].incorrectAnswers[2],
+    triviaQuestions[setNum].correctAnswer,
+  ];
+  shuffledArray = array.sort((a, b) => 0.5 - Math.random());
+  correctAnswer = triviaQuestions[setNum].correctAnswer;
+}
+
+async function buildTrivia() {
   const game = document.createElement("div");
   document.getElementById("game_container").appendChild(game);
 
-  const triviaQ = document.createElement("p");
-  triviaQ.innerText = data[0].question;
-  game.appendChild(triviaQ);
+  const question = document.createElement("p");
+  question.innerText = triviaQ;
+  game.appendChild(question);
 
   const triviaResponseForm = document.createElement("form");
   game.appendChild(triviaResponseForm);
-
-  const array = [
-    data[0].incorrectAnswers[0],
-    data[0].incorrectAnswers[1],
-    data[0].incorrectAnswers[2],
-    data[0].correctAnswer,
-  ];
-  const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
 
   const triviaResponseSubmit1 = document.createElement("input");
   triviaResponseSubmit1.setAttribute("type", "button");
@@ -82,7 +103,99 @@ document.getElementById("game_container").addEventListener("click", (evt) => {
     } else {
       alert(`you are wrong, it was ${correctAnswer}`);
     }
-    window.navigator.vibrate([200, 100, 200]);
     document.getElementById("game_container").firstChild.remove();
+    newRound();
   }
 });
+
+document
+  .getElementById("settings_container")
+  .addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    ninjaToggle();
+    limit = document.getElementById("setLimit").value;
+    difficulty = document.getElementById("setDifficulty").value;
+    category = [];
+
+    var catLength = document.getElementById("setCategory").options.length;
+    for (var i = 0; i < catLength; i++) {
+      opt = document.getElementById("setCategory").options[i];
+      if (opt.selected) {
+        category.push(opt.id);
+        //alert(opt.value);
+      }
+    }
+
+    alert(
+      `You picked ${limit} rounds, with a topic of ${category}, and a ${difficulty} dificulty! Let's go!`
+    );
+    playGame();
+  });
+
+function ninjaToggle() {
+  document.getElementById("settings_container").classList.toggle("ninja");
+}
+
+//getTrivia().then((data) => `${data[0].question} ${data[0].incorrectAnswers[0]} ${data[0].correctAnswer} ${data[0].incorrectAnswers[1]} ${data[0].incorrectAnswers[2]}`)
+// function buildGame() {
+//   const settings = document.createElement("div");
+//   document.getElementById("settings_container").appendChild(settings);
+
+//   const settingsForm = document.createElement("form");
+//   settings.appendChild(settingsForm);
+
+//   const setLimitLabel = document.createElement("label");
+//   setLimitLabel.setAttribute("for", "setLimit");
+//   setLimitLabel.innerText = "How many rounds?";
+//   settingsForm.appendChild(setLimitLabel);
+
+//   const setLimit = document.createElement("input");
+//   setLimit.setAttribute("type", "text");
+//   setLimit.id("setLimit");
+//   setLimit.classList.add("form-control");
+//   settingsForm.appendChild(setLimit);
+
+//   const setCategory = document.createElement("select");
+//   setCategory.setAttribute("multiple", "");
+//   setCategory.id("setCategory");
+//   setCategory.classList.add("form-control");
+//   setCategory.innerHTML = `<option>Film & TV</option>
+//   <option>Food & Drink</option>
+//   <option>General Knowledge</option>
+//   <option>Arts & Literature</option>
+//   <option>Geography</option>
+//   <option>History</option>
+//   <option>Music</option>
+//   <option>Science</option>
+//   <option>Society & Culture</option>
+//   <option>Sport & Leisure</option>`;
+//   settingsForm.appendChild(setCategory);
+
+//   const setDifficulty = document.createElement("select");
+//   setDifficulty.id("setDifficulty");
+//   setDifficulty.classList.add("form-control");
+//   setDifficulty.innerHTML = `<option>easy</option>
+//   <option>medium</option>
+//   <option>hard</option>`;
+//   settingsForm.appendChild(setDifficulty);
+
+//   const settingsSubmit = document.createElement("input");
+//   settingsSubmit.setAttribute("type", "submit");
+//   settingsForm.appendChild(settingsSubmit);
+// }
+
+//buildGame (form)
+//save game variables from form
+//delete form
+//hide interface
+//play game
+//save score
+//end game function
+
+// document.getElementById("newQuestion").addEventListener("click", async () => {
+//   //getTrivia()
+//   const result = await getTrivia();
+//   buildResponseArray(setNum);
+//   buildQuestion(setNum);
+//   buildTrivia(setNum);
+// });

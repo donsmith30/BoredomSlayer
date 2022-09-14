@@ -24,24 +24,52 @@
   <body>
     <div class="container overflow-hidden">
       <div class="flex2">
-        <!-- red left side -->
+        <!-- Options -->
         <div id="box">
-    <button
-      id="instruct"
-      type="button"
-      class="btn btn-sm btn-secondary"
-      data-bs-container="body"
-      data-bs-toggle="popover"
-      data-bs-placement="top"
-      data-bs-content="Press 'Start Game'.."
-    >
-      Instructions
-    </button>
-<button id="newQuestion">New Question</button>
-    <div id="game_container"></div>
-        </div>
+          <button
+            id="instruct"
+            type="button"
+            class="btn btn-sm btn-secondary"
+            data-bs-container="body"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="Press 'Start Game'.."
+          >
+            Instructions
+          </button>
+          <button id="newGame">Trivia Challenge</button>
 
-       
+          <div id="settings_container" class="container ninja">
+            <div>
+              <form>
+                <label for="setLimit">How many rounds?</label>
+                <input type="text" id="setLimit" class="form-control" />
+                <select multiple class="form-control" id="setCategory">
+                  <option id="arts_and_literature">Arts & Literature</option>
+                  <option id="film_and_tv">Film & TV</option>
+                  <option id="food_and_drink">Food & Drink</option>
+                  <option id="general_knowledge">General Knowledge</option>
+                  <option id="geography">Geography</option>
+
+                  <option id="history">History</option>
+                  <option id="music">Music</option>
+                  <option id="science">Science</option>
+                  <option id="society_and_culture">Society & Culture</option>
+                  <option id="sport_and_leisure">Sport & Leisure</option>
+                </select>
+                <select class="form-control" id="setDifficulty">
+                  <option>easy</option>
+                  <option>medium</option>
+                  <option>hard</option>
+                </select>
+                <input type="submit" value="New Game" />
+              </form>
+            </div>
+          </div>
+          <div id="game_container" class="container"></div>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
