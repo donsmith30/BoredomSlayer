@@ -76,15 +76,13 @@ document.getElementById("game_container").addEventListener("click", (evt) => {
   const clickedElement = evt.target;
   if (clickedElement.classList.contains("response")) {
     const userChoice = clickedElement.getAttribute("value");
-
     if (userChoice === correctAnswer) {
       alert("winner");
-
       //load up more qs
     } else {
       alert(`you are wrong, it was ${correctAnswer}`);
-      window.navigator.vibrate([200, 100, 200]);
     }
+    window.navigator.vibrate([200, 100, 200]);
     document.getElementById("game_container").firstChild.remove();
   }
 });
