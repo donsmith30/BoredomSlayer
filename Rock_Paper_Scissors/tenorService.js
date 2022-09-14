@@ -34,8 +34,10 @@ function tenorCallback_search(responsetext, text)
 
     top_10_gifs = response_objects["results"];
 
+    let randomNum = Math.floor(Math.random() * top_10_gifs.length);
+
     const modalDiv = $('#template');
-    let newPic = top_10_gifs[0]["media_formats"]["nanogif"]["url"];
+    let newPic = top_10_gifs[randomNum]["media_formats"]["nanogif"]["url"];
     modalDiv.find('img').attr('src', newPic);
     modalDiv.find('#modalSpan').text(text);
     modalDiv.modal('show');
