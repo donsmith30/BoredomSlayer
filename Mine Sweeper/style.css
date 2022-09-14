@@ -4,6 +4,7 @@
 
 #myVideo {
   position: absolute;
+  /* display: inline; */
   right: 0;
   bottom: 0;
   min-width: 100%;
@@ -28,15 +29,15 @@ body {
 
 .subtext {
   color: black;
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 10px;
 }
 
 .board {
   display: inline-grid;
   padding: 10px;
-  grid-template-columns: repeat(var(--size), 60px);
-  grid-template-rows: repeat(var(--size), 60px);
+  grid-template-columns: repeat(var(--size), 50px);
+  grid-template-rows: repeat(var(--size), 50px);
   gap: 4px;
   background-color: #777;
 }
@@ -52,6 +53,7 @@ body {
   user-select: none;
 }
 
+/* tile color */
 .board > [data-status="hidden"] {
   background-color: #bbb;
   cursor: pointer;
@@ -62,9 +64,5 @@ body {
 }
 
 .board > [data-status="number"] {
-  background-color: none;
-}
-
-.board > [data-status="marked"] {
   background-color: yellow;
 }
