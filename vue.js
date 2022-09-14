@@ -15,18 +15,6 @@ const msComponent = {
   template: '<iframe src="./Mine%20Sweeper/index.html"></iframe>',
 };
 
-document.getElementById("carousel").addEventListener("click", (evt) => {
-  const clickedElement = evt.target;
-  if (clickedElement.classList.contains("gameSelector")) {
-    const gameType = clickedElement.getAttribute("game_type");
-    document.getElementById("carousel").classList.toggle("ninja");
-  }
-});
-
-document.getElementById("menuToggle").addEventListener("click", () => {
-  document.getElementById("carousel").classList.toggle("ninja");
-});
-
 // Router map for defining components
 const routes = [
   {
