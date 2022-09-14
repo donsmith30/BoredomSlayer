@@ -15,6 +15,10 @@ const msComponent = {
   template: '<iframe src="./Mine%20Sweeper/index.html"></iframe>',
 };
 
+const mlComponent = {
+  template: '<iframe src="./Lights_Game/index.html"></iframe>',
+};
+
 // Router map for defining components
 const routes = [
   {
@@ -32,6 +36,10 @@ const routes = [
   {
     path: "/triviaLoad",
     component: triviaComponent,
+  },
+  {
+    path: "/memoryLights",
+    component: mlComponent,
   },
 ];
 
