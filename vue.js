@@ -18,6 +18,9 @@ const msComponent = {
 const mlComponent = {
   template: '<iframe src="./Lights_Game/index.html"></iframe>',
 };
+const cardsComponent = {
+  template: '<iframe src="./Memory_Cards/index.html"></iframe>',
+};
 
 // Router map for defining components
 const routes = [
@@ -40,6 +43,10 @@ const routes = [
   {
     path: "/memoryLights",
     component: mlComponent,
+  },
+  {
+    path: "/memoryCards",
+    component: cardsComponent,
   },
 ];
 
