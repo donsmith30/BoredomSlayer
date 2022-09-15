@@ -3,7 +3,7 @@
 }
 
 #myVideo {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   min-width: 100%;
@@ -23,10 +23,12 @@ body {
 }
 
 .title {
+  text-align: center;
   margin: 20px;
 }
 
 .subtext {
+  text-align: center;
   color: black;
   font-size: 2rem;
   margin-bottom: 10px;

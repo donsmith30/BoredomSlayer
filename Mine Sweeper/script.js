@@ -1,16 +1,24 @@
+const popoverTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="popover"]'
+);
+const popoverList = [...popoverTriggerList].map(
+  (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+);
+
 /* -----Dataset for tiles on board----- */
+const bSize = 10;
+const mines = 12;
+
 const tileTypes = {
   Hidden: "hidden",
   Mine: "mine",
   Number: "number",
-  //Marked: "marked",
 };
 
 /* -----Create Board-----  */
 function generateBoard(boardSize, placedMines) {
   const board = [];
   const setMines = getMinePos(boardSize, placedMines); // # of mines as array of values from (const mines)
-  console.log(setMines);
 
   for (let x = 0; x < boardSize; x++) {
     const row = []; //create row as array
@@ -26,12 +34,11 @@ function generateBoard(boardSize, placedMines) {
         mine: setMines.some(positionMatch.bind(null, { x, y })), //checks if mine pos matches {a, b} position
 
         get status() {
-          //get dataset status
-          return this.createdDiv.dataset.status;
+          return this.createdDiv.dataset.status; //get dataset status
         },
+
         set status(value) {
-          //set dataset status + value
-          this.createdDiv.dataset.status = value;
+          this.createdDiv.dataset.status = value; //set dataset status + value
         },
       };
 
@@ -43,21 +50,17 @@ function generateBoard(boardSize, placedMines) {
   return board;
 }
 
-/* -----Board size & mines vars----- */
-const bSize = 10;
-const mines = 10;
 /* -----Populate board----- */
 const createdBoard = generateBoard(bSize, mines); //***--fully created game board--***
 const boardElt = document.querySelector(".board"); //call selected div from html
-console.log(createdBoard);
 
 //loop through each row to add individual tiles. multi level array
 createdBoard.forEach((row) => {
   row.forEach((tile) => {
     boardElt.append(tile.createdDiv); //once looped we add created rows/tiles to created div (board)
     tile.createdDiv.addEventListener("click", () => {
-      console.log("clicked");
       showTiles(createdBoard, tile); //show tiles on click
+      winLose(); //checks for win or lose
     });
   });
 });
@@ -91,7 +94,6 @@ function positionMatch(a, b) {
 }
 /* -----Reveal Tiles on Click----- */
 function showTiles(createdBoard, tile) {
-  console.log(tile);
   if (tile.status !== tileTypes.Hidden) {
     return; //reveal tile if its not hidden (grey)
   }
@@ -123,49 +125,62 @@ function nearTiles(createdBoard, { x, y }) {
 
   return tiles;
 }
-/* */
+
 function winLose() {
-  const win = winner(board);
-  const lose = loser(board);
+  const win = winner(createdBoard);
+  const lose = loser(createdBoard);
 
   if (win || lose) {
-    boardElt.addEventListener("click", stopProp, { capture: true });
-    boardElt.addEventListener("contextmenu", stopProp, { capture: true });
+    boardElt.addEventListener("click", stopProp, { capture: true }); //stops events from continuing (click)
   }
 
   if (win) {
-    //add gif here
+    //alert("you win");
   }
   if (lose) {
-    //add gif here
-    board.forEach((row) => {
+    //on lose, display all mine pos
+    createdBoard.forEach((row) => {
       row.forEach((tile) => {
-        if (tile.mine) showTiles(board, tile); //reveals mines on lose
+        if (tile.mine) showTiles(createdBoard, tile);
       });
     });
   }
 }
 
-//stops events from going further to tiles
-function stopProp(e) {
-  e.stopImmediatePropagation();
+function stopProp(evt) {
+  evt.stopImmediatePropagation();
 }
 
-function winner() {
-  return board.every((row) => {
+function winner(onBoard) {
+  let tenorSearch = "";
+  let message = "";
+  return onBoard.every((row) => {
     return row.every((tile) => {
-      return (
-        t.status === tileTypes.Number || //is tile a number?
-        (tile.mine && tile.status === tileTypes.Hidden)
-      ); //is tile a mine or hidden?
+      if (
+        tile.status === tileTypes.Number ||
+        (tile.mine && tile.status == tileTypes.Hidden)
+      ) {
+        tenorSearch = "Great Job";
+        message = "YOU CLEARED THE FIELD";
+        /* WIN/RESET gif */
+        alert("you win");
+      }
     });
   });
 }
 
-function loser() {
-  return board.some((row) => {
+function loser(onBoard) {
+  let tenorSearch = "";
+  let message = "";
+
+  return onBoard.some((row) => {
     return row.some((tile) => {
-      return tile.status === tileTypes.Mine; //checks if a mine is clicked. if true, you lose
+      if (tile.status === tileTypes.Mine) {
+        tenorSearch = "exploding";
+        message = "YOU HIT A MINE!!! Walk it off";
+        alert("you lose");
+        return tile.mine;
+      }
     });
   });
 }
