@@ -19,7 +19,6 @@ const tileTypes = {
 function generateBoard(boardSize, placedMines) {
   const board = [];
   const setMines = getMinePos(boardSize, placedMines); // # of mines as array of values from (const mines)
-
   for (let x = 0; x < boardSize; x++) {
     const row = []; //create row as array
     for (let y = 0; y < boardSize; y++) {
@@ -135,15 +134,25 @@ function winLose() {
   }
 
   if (win) {
-    //alert("you win");
+    let tenorSearch = "";
+    let message = "";
+    tenorSearch = "great job";
+    message = "YOU CLEARED THE GRID!!!";
+    endGameGif(tenorSearch, message);
   }
+
   if (lose) {
+    let message = "";
+    let tenorSearch = "";
     //on lose, display all mine pos
     createdBoard.forEach((row) => {
       row.forEach((tile) => {
         if (tile.mine) showTiles(createdBoard, tile);
       });
     });
+    tenorSearch = "exploding";
+    message = "YOU HIT A MINE!!! Walk it off. Hit 'Reset Game' to play again";
+    endGameGif(tenorSearch, message);
   }
 }
 
@@ -152,35 +161,26 @@ function stopProp(evt) {
 }
 
 function winner(onBoard) {
-  let tenorSearch = "";
-  let message = "";
   return onBoard.every((row) => {
     return row.every((tile) => {
-      if (
+      return (
         tile.status === tileTypes.Number ||
         (tile.mine && tile.status == tileTypes.Hidden)
-      ) {
-        tenorSearch = "Great Job";
-        message = "YOU CLEARED THE FIELD";
-        /* WIN/RESET gif */
-        alert("you win");
-      }
+      );
     });
   });
 }
 
 function loser(onBoard) {
-  let tenorSearch = "";
-  let message = "";
-
   return onBoard.some((row) => {
     return row.some((tile) => {
       if (tile.status === tileTypes.Mine) {
-        tenorSearch = "exploding";
-        message = "YOU HIT A MINE!!! Walk it off";
-        alert("you lose");
         return tile.mine;
       }
     });
   });
+}
+
+function endGameGif(query, text) {
+  tenorService.grabData(query, text);
 }
