@@ -18,6 +18,13 @@
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
     />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo+Play&display=swap"
+      rel="stylesheet"
+    />
     <!-- local CSS -->
     <link rel="stylesheet" href="./style.css" />
 
@@ -32,6 +39,8 @@
       <div class="flex2">
         <!-- Options -->
         <div id="box">
+          <div class="title">You think you know it?...</div>
+
           <button
             id="instruct"
             type="button"
@@ -39,11 +48,13 @@
             data-bs-container="body"
             data-bs-toggle="popover"
             data-bs-placement="top"
-            data-bs-content="Press 'Start Game'.."
+            data-bs-content="So 'You think you know it?...' This is the quiz game that will let you know if you do or don't. To play select 'Trivia Challenge' and set up your rounds, topic(s) *hold cmd|alt key + mouse for multiple* and your challenge level. Once ready hit new game and play!"
           >
             Instructions
           </button>
-          <button id="newGame">Trivia Challenge</button>
+          <button id="newGame" class="btn btn-primary btn-sm">
+            Trivia Challenge
+          </button>
 
           <div id="settings_container" class="container ninja">
             <div>
@@ -57,6 +68,9 @@
                   max="20"
                   required
                 />
+                <label for="setLimit"
+                  >Select your topic(s)--cmd|alt + mouse for multiple</label
+                >
                 <select multiple class="form-control" id="setCategory">
                   <option id="arts_and_literature">Arts & Literature</option>
                   <option id="film_and_tv">Film & TV</option>
@@ -70,6 +84,7 @@
                   <option id="society_and_culture">Society & Culture</option>
                   <option id="sport_and_leisure">Sport & Leisure</option>
                 </select>
+                <label for="setLimit">Choose the level of challenge</label>
                 <select class="form-control" id="setDifficulty">
                   <option>easy</option>
                   <option>medium</option>
