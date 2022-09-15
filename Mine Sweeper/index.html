@@ -19,27 +19,63 @@
 
     <!-- my Css -->
     <link rel="stylesheet" href="./style.css" />
-    <title>Mine Sweeper</title>
 
-    <!-- links -->
+    <!-- jQuery Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+    <!-- Bootstrap JS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
-    <script src="../Services/unsplashService.js"></script>
-    <script src="../Services/tenorService.js"></script>
 
-    <section>
+    <!-- Tenor Gif JS -->
+    <script src="../Services/tenorService.js"></script>
+    <title>Mine Sweeper</title>
+    
   <body>
     <video autoplay muted loop id="myVideo">
-        <source
-          src="https://media.istockphoto.com/videos/soldier-using-a-metal-detector-in-fields-ukrainian-explosive-ordnance-video-id1412630303"
-          type="video/mp4"
-        />
-      </video>
+      <source
+        src="https://media.istockphoto.com/videos/soldier-using-a-metal-detector-in-fields-ukrainian-explosive-ordnance-video-id1412630303"
+        type="video/mp4"
+      />
+    </video>
+
+    <!-- <audio autoplay loop>
+      <source src="https://www.fesliyanstudios.com/royalty-free-music/download/sneaky-action/2407"/>
+    </audio> -->
+
+    <div
+    class="modal fade"
+    id="template2"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content" style="align-items: center">
+        <div class="modal-body">
+          <img src="" alt="" id="modalImg2" />
+          <p id="modalSpan2"></p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+          >
+            Got it!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
     <h2 class="title">Mine Sweeper</h2>
-    <div class="subtext">No Risk No Reward</div> 
+    <div class="subtext">Suspected Mines: 12</div>
+
+    <form> 
     <div class="board"></div>
     <div>
     <button
@@ -53,9 +89,10 @@
             >
               Instructions
             </button>
+            <input type="submit" class="btn btn-sm btn-primary" value="Reset Game"/>
           </div>
-  </section>
-  
+        </form>
+          
     <!-- my JS -->
     <script src="./script.js" type="module"></script>
   </body>
