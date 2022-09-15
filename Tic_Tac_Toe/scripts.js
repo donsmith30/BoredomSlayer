@@ -7,6 +7,17 @@ let currentPlayer = PLAYER_X;
 let gameStatus = "loser";
 let spaces = Array(9).fill(null);
 let running = false;
+let round = 0;
+const lines = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
 startGame();
 
@@ -21,8 +32,9 @@ function boxClicked(evt) {
 
   if (!spaces[id]) {
     spaces[id] = currentPlayer;
+    round++;
     evt.target.textContent = currentPlayer;
-    calculateWinner(spaces);
+    gameOver(spaces);
   }
 }
 function changePlayer() {
@@ -35,6 +47,7 @@ function changePlayer() {
 }
 
 function restartGame() {
+  resetRound();
   changePlayer();
   statusText.texContent = `${currentPlayer}'s turn`;
   spaces.fill(null);
@@ -45,37 +58,38 @@ function restartGame() {
     running = true;
   });
 }
+function gameOver(space) {
+  if (round > 8) {
+    declareTie();
+  } else {
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (space[a] && space[a] === space[b] && space[a] === space[c]) {
+        console.log(round);
+        declareWinner();
 
-function calculateWinner(spaces) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (spaces[a] && spaces[a] === spaces[b] && spaces[a] === spaces[c]) {
-      console.log("winner");
-      setEndgameModal(
-        "tic tac toe",
-        `${currentPlayer} won the game! GOOD GAME!`
-      );
-      //add points
-      restartGame();
-
-      return spaces[a];
+        //add points
+        restartGame();
+        return space[a];
+      }
     }
   }
-  console.log("loser");
+  console.log(round);
   changePlayer();
   return null;
+}
+function declareWinner() {
+  resetRound();
+  setEndgameModal("tic tac toe", `${currentPlayer} won the game! GOOD GAME!`);
+}
+function declareTie() {
+  resetRound();
+  setEndgameModal("game tie!", `Well...Play again`);
 }
 
 function setEndgameModal(query, text) {
   tenorService.grabData(query, text);
+}
+function resetRound() {
+  round = 0;
 }
