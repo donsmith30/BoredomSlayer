@@ -184,3 +184,7 @@ function loser(onBoard) {
 function endGameGif(query, text) {
   tenorService.grabData(query, text);
 }
+
+function resetGame() {
+  document.getElementById("gameForm").reset();
+}
