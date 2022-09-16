@@ -1,5 +1,12 @@
+const popoverTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="popover"]'
+);
+const popoverList = [...popoverTriggerList].map(
+  (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+);
+
 const gameBoard = document.querySelector("#gameBoard");
-const ctx = gameBoard.getContext("2d");
+const context = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
 const resetBtn = document.querySelector("#resetBtn");
 const gameWidth = gameBoard.width;
@@ -26,7 +33,7 @@ let snake = [
 window.addEventListener("keydown", changeDirection);
 resetBtn.addEventListener("click", resetGame);
 
-gameStart();
+// gameStart();
 
 function gameStart() {
   running = true;
@@ -47,11 +54,12 @@ function nextTick() {
     }, 75);
   } else {
     displayGameOver();
+    endGameGif("Hit the wall", "THAT HURT!!! Hit reset to try again");
   }
 }
 function clearBoard() {
-  ctx.fillStyle = boardBackground;
-  ctx.fillRect(0, 0, gameWidth, gameHeight);
+  context.fillStyle = boardBackground;
+  context.fillRect(0, 0, gameWidth, gameHeight);
 }
 function createFood() {
   function randomFood(min, max) {
@@ -63,8 +71,8 @@ function createFood() {
   foodY = randomFood(0, gameWidth - unitSize);
 }
 function drawFood() {
-  ctx.fillStyle = foodColor;
-  ctx.fillRect(foodX, foodY, unitSize, unitSize);
+  context.fillStyle = foodColor;
+  context.fillRect(foodX, foodY, unitSize, unitSize);
 }
 function moveSnake() {
   const head = { x: snake[0].x + xVelocity, y: snake[0].y + yVelocity };
@@ -80,11 +88,11 @@ function moveSnake() {
   }
 }
 function drawSnake() {
-  ctx.fillStyle = snakeColor;
-  ctx.strokeStyle = snakeBorder;
+  context.fillStyle = snakeColor;
+  context.strokeStyle = snakeBorder;
   snake.forEach((snakePart) => {
-    ctx.fillRect(snakePart.x, snakePart.y, unitSize, unitSize);
-    ctx.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize);
+    context.fillRect(snakePart.x, snakePart.y, unitSize, unitSize);
+    context.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize);
   });
 }
 function changeDirection(event) {
@@ -140,7 +148,10 @@ function checkGameOver() {
   }
 }
 function displayGameOver() {
-  setEndgameModal("Game Over");
+  context.font = "50px MV Boli";
+  context.fillStyle = "black";
+  context.textAlign = "center";
+  context.fillText("GAME OVER!", gameWidth / 2, gameHeight / 2);
   running = false;
 }
 function resetGame() {
@@ -156,6 +167,6 @@ function resetGame() {
   ];
   gameStart();
 }
-function setEndgameModal(query, text) {
+function endGameGif(query, text) {
   tenorService.grabData(query, text);
 }

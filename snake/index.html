@@ -9,11 +9,13 @@
     <script src="../Services/tenorService.js"></script>
   </head>
   <body>
-    <div id="gameContainer">
-      <canvas id="gameBoard" width="500" height="500"></canvas>
-      <div id="scoreText">0</div>
-      <button id="resetBtn">Reset</button>
-    </div>
+    <video autoplay muted loop id="myVideo">
+      <source
+        src="https://media.istockphoto.com/videos/shot-of-sidewinderperingueys-adder-moving-across-the-sand-dune-video-id584941448"
+        type="video/mp4"
+      />
+    </video>
+    <section class="endGameGif">
     <div
     class="modal fade"
     id="template2"
@@ -21,7 +23,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+  <div class="modal-dialog">
       <div class="modal-content" style="align-items: center">
         <div class="modal-body">
           <img src="" alt="" id="modalImg2" />
@@ -29,12 +31,52 @@
         </div>
         <div class="modal-footer">
           <button
+          id="modalBtn"
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
+            aria-hidden="false"
           >
-            Play Again
+            GOT IT?
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+    <div id="gameContainer"></div>
+      <canvas id="gameBoard" width="500" height="500"> Welcome to the Snake Game</canvas>
+    </section>
+      <div id="scoreText">0</div>
+    
+<section>
+      <button id="resetBtn">Play</button>
+      <button
+        id="instruct"
+        type="button"
+        class="btn btn-sm btn-warning"
+        data-bs-container="body"
+        data-bs-toggle="popover"
+        data-bs-placement="top"
+        data-bs-content="Use arrow to change direction. eat as many apples. DON'T EAT YOURSELF. lastly don't hit the wall"
+      >
+        Instructions
+      </button>
+
+      <!-- Modal2 -->
+
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </div>
+  </section>
+
     <script src="index.js"></script>
   </body>
 </html>
