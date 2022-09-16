@@ -25,15 +25,43 @@ function httpGetAsync(theUrl, callback, text)
 function tenorCallback_search(responsetext, text)
 {
     let response_objects = JSON.parse(responsetext);
-
     top_10_gifs = response_objects["results"];
-
     let randomNum = Math.floor(Math.random() * top_10_gifs.length);
+
+    function randColor() {
+        let decimals = "0123456789ABCDEF"
+        let hash = "#";
+        for (let index = 0; index < 6; index++) {
+            hash += decimals[Math.floor(Math.random() * decimals.length)];
+        }
+        return hash;
+    }
 
     const modalDiv = $('#template2');
     let newPic = top_10_gifs[randomNum]["media_formats"]["tinygif"]["url"];
     modalDiv.find('img').attr('src', newPic);
-    modalDiv.find('#modalSpan2').text(text);
+
+    modalDiv.find('.btn').on({
+        mouseover: function(){
+            $(this).css('background-color', randColor());
+        },
+        mouseleave: function() {
+            $(this).css('background-color', randColor());
+        },
+    });
+
+    let endText = modalDiv.find('#modalSpan2');
+    endText.text(text);
+    endText.css('color', randColor());
+
+    let kanyeUrl = "https://api.kanye.rest";
+    fetch(kanyeUrl).then((response) => {
+        return response.json();
+    }).then((data) => {
+        let kanyeQuote = modalDiv.find('#modalSpan3');
+        kanyeQuote.text(data.quote);
+        kanyeQuote.css('color', randColor());
+    });
     modalDiv.modal('show');
 
     return;
