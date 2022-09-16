@@ -13,10 +13,15 @@ function wireUpButtons() {
     $('#start').on('click', onStartGame)
     $('#stop').on('click', onStopGame)
     $('.div_color1').on('click', onUserClick)
+    $('.btn').on('mouseenter', randColor)
+    $('.btn').on('mouseleave', randColor)
+    $('section').on('mouseenter', randColor)
+    $('section').on('mouseleave', randColor)
 }
 
 let compArr = [];
 let userArr = [];
+let difficulty = '';
 
 function onStartGame() {
     selectNumOfTurns();
@@ -75,11 +80,11 @@ function compareArrs() {
 
     if(compArr.join() === userArr.join()){
         if(userArr.length === numOfTurns) {
-            tenorSearch = 'winning';
+            tenorSearch = 'lights';
             message = 'YOU WON!!';
             setEndgameModal(tenorSearch, message);
             
-            onStopGame();
+            setTimeout(onStopGame, 2000);
         } 
         else {
             userArr = [];
@@ -87,11 +92,11 @@ function compareArrs() {
         }
     }
     else {
-        tenorSearch = 'losing';
+        tenorSearch = 'lights off';
         message = 'yOU lOsE!';
         setEndgameModal(tenorSearch, message);
         
-        onStopGame();
+        setTimeout(onStopGame, 2000);
     }
 }
 
@@ -115,4 +120,13 @@ function returnColor(divId, i) {
 
 function setEndgameModal(query, text) {
     tenorService.grabData(query, text);
+}
+
+function randColor() {
+    let decimals = "0123456789ABCDEF"
+    let hash = "#";
+    for (let index = 0; index < 6; index++) {
+        hash += decimals[Math.floor(Math.random() * decimals.length)];
+    }
+    $(this).css('background-color', hash);
 }
