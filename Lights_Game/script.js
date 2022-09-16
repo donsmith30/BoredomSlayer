@@ -7,7 +7,6 @@ let userArr = [];
 let difficulty = '';
 let isNum = false;
 let isDiff = false;
-let userClicked = false;
 let count = 0;
 let timerIdE = 0;
 let timerIdM = 0;
@@ -78,7 +77,6 @@ function onStopGame() {
     numOfTurns = '';
     isNum = false;
     isDiff = false;
-    userClicked = false;
     alert("GameBoard Reset");
 }
 
@@ -89,21 +87,12 @@ function getRandom() {
     console.log(compArr);
     if(difficulty === 'EASY') {
         timerIdE = setTimeout(compareArrs, 16000);
-        // if(userClicked === true) {
-        //     clearTimeout(timerId);
-        // }
     }
     if(difficulty === 'MEDIUM') {
         timerIdM = setTimeout(compareArrs, 11000);
-        // if(userClicked === true) {
-        //     clearTimeout(timerId);
-        // }
     }
     if(difficulty === 'HARD') {
         timerIdH = setTimeout(compareArrs, 6000);
-        // if(userClicked === true) {
-        //     clearTimeout(timerId);
-        // }
     }
 }
 
@@ -112,7 +101,6 @@ function compTurn() {
         const sequence = compArr[i];
         setTimeout(flash, i * 600, sequence, i);
     }
-    userClicked = false;
 }
 
 function onUserClick(e) {
@@ -129,7 +117,6 @@ function onUserClick(e) {
         clearTimeout(timerIdE);
         clearTimeout(timerIdM);
         clearTimeout(timerIdH);
-        // userClicked = true;
     }
 }
 
