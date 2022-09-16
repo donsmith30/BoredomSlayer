@@ -71,3 +71,29 @@ iframe {
   background-size: cover;
   background-position: center;
 }
+
+#menuToggle {
+  width: 40;
+  height: 40;
+  z-index: 1;
+}
+
+#navTitle {
+  font-family: "Rubik Iso", cursive;
+  color: yellow;
+  width: 100%;
+  display: block;
+  text-align: center;
+  position: absolute;
+  /* float: none; */
+  /* vertical-align: top; */
+}
+
+#backgroundVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
