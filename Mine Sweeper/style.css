@@ -3,7 +3,7 @@
 }
 
 #myVideo {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   min-width: 100%;
@@ -14,7 +14,6 @@
 body {
   margin: 0;
   position: center;
-  /* background-color: #333; */
   display: flex;
   align-items: center;
   font-size: 3rem;
@@ -23,10 +22,13 @@ body {
 }
 
 .title {
-  margin: 20px;
+  text-align: center;
+  font-size: 4rem;
+  margin: 10px;
 }
 
 .subtext {
+  text-align: center;
   color: black;
   font-size: 2rem;
   margin-bottom: 10px;
@@ -37,7 +39,7 @@ body {
   padding: 10px;
   grid-template-columns: repeat(var(--size), 50px);
   grid-template-rows: repeat(var(--size), 50px);
-  gap: 4px;
+  gap: 3px;
   background-color: transparent;
 }
 

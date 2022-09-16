@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS Events</title>
+    <title>Boredom Slayer</title>
     <!-- reset CSS -->
     <link
       rel="stylesheet"
@@ -24,11 +24,19 @@
       href="https://unpkg.com/@egjs/flicking/dist/flicking.css"
       crossorigin="anonymous"
     />
+
     <!-- local CSS -->
     <link rel="stylesheet" href="./style.css" />
   </head>
+  <nav class="navbar navbar-dark bg-dark">
+    <button id="menuToggle" width="30" height="30">
+      <img
+        src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-video-game-esport-itim2101-lineal-color-itim2101.png"
+      />
+      Menu
+    </button>
+  </nav>
   <body>
-    <button id="menuToggle">Menu</button>
     <div id="app">
       <div id="carousel" class="flicking-viewport">
         <!-- Camera element -->
@@ -59,11 +67,18 @@
               >Trivia</router-link
             >
           </div>
-          <div class="flicking-panel lights">
+          <div class="flicking-panel memCards">
             <router-link
-              to="/memoryLights"
+              to="/memoryCards"
               class="gameSelector btn btn-sm btn-light"
-              >Memory Lights</router-link
+              >Memory Cards</router-link
+            >
+          </div>
+          <div class="flicking-panel kanye">
+            <router-link
+              to="/kanyeSays"
+              class="gameSelector btn btn-sm btn-light"
+              >Kanye Says</router-link
             >
           </div>
         </div>

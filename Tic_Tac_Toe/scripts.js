@@ -4,8 +4,11 @@ let boxes = Array.from(document.getElementsByClassName("box"));
 const PLAYER_O = "O";
 const PLAYER_X = "X";
 let currentPlayer = PLAYER_X;
+let gameStatus = "loser";
 let spaces = Array(9).fill(null);
-const winningConditions = [
+let running = false;
+let round = 0;
+const lines = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -15,7 +18,6 @@ const winningConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-let running = false;
 
 startGame();
 
@@ -30,47 +32,23 @@ function boxClicked(evt) {
 
   if (!spaces[id]) {
     spaces[id] = currentPlayer;
+    round++;
     evt.target.textContent = currentPlayer;
-
-    // if (playerWon() !== false) {
-    //   statusText = "you won!";
-    //   let three_in_line = playerWon;
-
-    //   three_in_line.map(
-    //     (box) => (boxes[box].style.backgroundColor = winnerIndicator)
-    //   );
-    // }
-    playerWon();
-    changePlayer();
-    // currentPlayer = currentPlayer == PLAYER_X ? PLAYER_O : PLAYER_X;
+    gameOver(spaces);
   }
 }
 function changePlayer() {
-  currentPlayer = currentPlayer == PLAYER_X ? PLAYER_O : PLAYER_X;
-  statusText.texContent = `${currentPlayer}'s turn`;
-}
-
-function playerWon() {
-  // let roundWon = false;
-  // for (const conditions of winningConditions) {
-  //   let [a, b, c] = conditions;
-  //   if (spaces[a] && spaces[a] == spaces[b] && spaces[a] == spaces[c]) {
-  //     roundWon = true;
-  //     break;
-  //   }
-  // }
-  // if (roundWon) {
-  //   statusText.textContent = `${currentPlayer} wins!`;
-  //   running = false;
-  // } else if (!spaces.fill[id]) {
-  //   statusText.textContent = `Draw!`;
-  //   running = false;
-  // } else {
-  //   }
+  if (currentPlayer === PLAYER_X) {
+    currentPlayer = PLAYER_O;
+  } else {
+    currentPlayer = PLAYER_X;
+  }
+  statusText.textContent = `${currentPlayer}'s turn`;
 }
 
 function restartGame() {
-  currentPlayer = PLAYER_X;
+  resetRound();
+  changePlayer();
   statusText.texContent = `${currentPlayer}'s turn`;
   spaces.fill(null);
 
@@ -79,4 +57,39 @@ function restartGame() {
     box.style.backgroundColor = "";
     running = true;
   });
+}
+function gameOver(space) {
+  if (round > 8) {
+    declareTie();
+  } else {
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (space[a] && space[a] === space[b] && space[a] === space[c]) {
+        console.log(round);
+        declareWinner();
+
+        //add points
+        restartGame();
+        return space[a];
+      }
+    }
+  }
+  console.log(round);
+  changePlayer();
+  return null;
+}
+function declareWinner() {
+  resetRound();
+  setEndgameModal("tic tac toe", `${currentPlayer} won the game! GOOD GAME!`);
+}
+function declareTie() {
+  resetRound();
+  setEndgameModal("game tie!", `It's a tie! Well...Play again`);
+}
+
+function setEndgameModal(query, text) {
+  tenorService.grabData(query, text);
+}
+function resetRound() {
+  round = 0;
 }

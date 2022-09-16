@@ -18,12 +18,22 @@ const msComponent = {
 const mlComponent = {
   template: '<iframe src="./Lights_Game/index.html"></iframe>',
 };
+const cardsComponent = {
+  template: '<iframe src="./Memory_Cards/index.html"></iframe>',
+};
+const kanyeComponent = {
+  template: '<iframe src="./Kanye_Says/index.html"></iframe>',
+};
 
 // Router map for defining components
 const routes = [
   {
     path: "/rps",
     component: rpsComponent,
+  },
+  {
+    path: "/memoryLights",
+    component: mlComponent,
   },
   {
     path: "/ttt",
@@ -37,9 +47,14 @@ const routes = [
     path: "/triviaLoad",
     component: triviaComponent,
   },
+
   {
-    path: "/memoryLights",
-    component: mlComponent,
+    path: "/memoryCards",
+    component: cardsComponent,
+  },
+  {
+    path: "/kanyeSays",
+    component: kanyeComponent,
   },
 ];
 

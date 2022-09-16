@@ -41,11 +41,9 @@ function newRound() {
   } else {
     var winPercent = (playerPoints / limit) * 100;
     if (winPercent >= 70) {
-      setEndgameModal("Winner", "You win!");
-      alert(`${winPercent}! GOOD GAME!`);
+      setEndgameModal("Win", `${winPercent}% right! GOOD GAME!`);
     } else {
-      setEndgameModal("loser", "You lose!");
-      alert(`${winPercent}! BAD GAME!`);
+      setEndgameModal("Lose", `${winPercent}% right! BAD GAME!`);
     }
     setNum = 0;
     playerPoints = 0;
