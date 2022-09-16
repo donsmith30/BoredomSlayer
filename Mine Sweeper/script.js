@@ -1,3 +1,4 @@
+/* Popover on win/lose */
 const popoverTriggerList = document.querySelectorAll(
   '[data-bs-toggle="popover"]'
 );
@@ -8,7 +9,6 @@ const popoverList = [...popoverTriggerList].map(
 /* -----Dataset for tiles on board----- */
 const bSize = 10;
 const mines = 12;
-
 const tileTypes = {
   Hidden: "hidden",
   Mine: "mine",
@@ -18,97 +18,94 @@ const tileTypes = {
 /* -----Create Board-----  */
 function generateBoard(boardSize, placedMines) {
   const board = [];
-  const setMines = getMinePos(boardSize, placedMines); // # of mines as array of values from (const mines)
+  const setMines = getMinePos(boardSize, placedMines);
+
   for (let x = 0; x < boardSize; x++) {
-    const row = []; //create row as array
+    const row = [];
     for (let y = 0; y < boardSize; y++) {
-      //create new div element to store rows in
       const createdDiv = document.createElement("div");
-      createdDiv.dataset.status = tileTypes.Hidden; //assign hidden status to tiles in created div
+      createdDiv.dataset.status = tileTypes.Hidden;
 
       const tile = {
         createdDiv,
         x,
         y,
-        mine: setMines.some(positionMatch.bind(null, { x, y })), //checks if mine pos matches {a, b} position
+        mine: setMines.some(positionMatch.bind(null, { x, y })),
 
+        /*---Get/Set dataset status--- */
         get status() {
-          return this.createdDiv.dataset.status; //get dataset status
+          return this.createdDiv.dataset.status;
         },
 
         set status(value) {
-          this.createdDiv.dataset.status = value; //set dataset status + value
+          this.createdDiv.dataset.status = value;
         },
       };
-
-      row.push(tile); //add tiles layout to rows
+      row.push(tile);
     }
-    board.push(row); //add rows to created board
+    board.push(row);
   }
-
   return board;
 }
 
 /* -----Populate board----- */
-const createdBoard = generateBoard(bSize, mines); //***--fully created game board--***
-const boardElt = document.querySelector(".board"); //call selected div from html
+const createdBoard = generateBoard(bSize, mines);
+const boardElt = document.querySelector(".board");
 
-//loop through each row to add individual tiles. multi level array
+//loop through each row to add individual tiles
 createdBoard.forEach((row) => {
   row.forEach((tile) => {
-    boardElt.append(tile.createdDiv); //once looped we add created rows/tiles to created div (board)
+    boardElt.append(tile.createdDiv);
     tile.createdDiv.addEventListener("click", () => {
-      showTiles(createdBoard, tile); //show tiles on click
+      showTiles(createdBoard, tile);
       winLose(); //checks for win or lose
     });
   });
 });
 
-boardElt.style.setProperty("--size", bSize); //assigns template size according to size of board
+boardElt.style.setProperty("--size", bSize);
 
 /* -----Populate Mines----- */
 function getMinePos(boardSize, placedMines) {
   const placement = [];
-  //place mines at random positions
   while (placement.length < placedMines) {
     const target = {
       x: randomNumber(boardSize),
       y: randomNumber(boardSize),
     };
-    //check if a position already exists
     if (!placement.some(positionMatch.bind(null, target))) {
-      placement.push(target); //if x, y positions are not match, we add to the array
+      placement.push(target);
     }
   }
   return placement;
 }
 
 function randomNumber(size) {
-  return Math.floor(Math.random() * size); //converts random # to integer
+  return Math.floor(Math.random() * size);
 }
 /* -----Check for coordinates----- */
 function positionMatch(a, b) {
-  //checks coordinates of positions. if true = same pos
   return a.x === b.x && a.y === b.y;
 }
+
 /* -----Reveal Tiles on Click----- */
 function showTiles(createdBoard, tile) {
   if (tile.status !== tileTypes.Hidden) {
-    return; //reveal tile if its not hidden (grey)
+    return;
   }
 
   if (tile.mine) {
     tile.status = tileTypes.Mine;
-    return; //reveal tile if its a mine (red)
+    return;
   }
 
-  tile.status = tileTypes.Number; //reveal tile if its a number
+  tile.status = tileTypes.Number;
   const proximityTiles = nearTiles(createdBoard, tile);
   const nearMines = proximityTiles.filter((t) => t.mine);
   if (nearMines.length === 0) {
-    proximityTiles.forEach(showTiles.bind(null, createdBoard)); //will display non mined/number tiles when clicked
+    proximityTiles.forEach(showTiles.bind(null, createdBoard));
   } else {
-    tile.createdDiv.textContent = nearMines.length; //will display number of mines in proximity
+    tile.createdDiv.textContent = nearMines.length;
   }
 }
 
@@ -130,7 +127,7 @@ function winLose() {
   const lose = loser(createdBoard);
 
   if (win || lose) {
-    boardElt.addEventListener("click", stopProp, { capture: true }); //stops events from continuing (click)
+    boardElt.addEventListener("click", stopProp, { capture: true });
   }
 
   if (win) {
@@ -144,7 +141,6 @@ function winLose() {
   if (lose) {
     let message = "";
     let tenorSearch = "";
-    //on lose, display all mine pos
     createdBoard.forEach((row) => {
       row.forEach((tile) => {
         if (tile.mine) showTiles(createdBoard, tile);
