@@ -26,12 +26,18 @@
   </head>
 
   <body>
+    <video autoplay muted loop id="myVideo">
+      <source
+        src="https://media.istockphoto.com/videos/tictactoe-video-id472514935"
+        type="video/mp4"
+      />
+    </video>
     <main class="background">
       <section>
         <h1 id="gameTitle">Tic Tac Toe</h1>
       </section>
       <section class="container">
-        <table id="game-board">
+        <table class="game-board">
           <tr>
             <td id="0" class="box"></td>
             <td id="1" class="box"></td>
@@ -51,9 +57,23 @@
       </section>
 
       <section class="">
-        <h2 id="statusText"></h2>
+        <h2 id="statusText"><strong></strong></h2>
         <br />
-        <button id="restartBtn">Restart</button>
+        <button
+          id="instruct"
+          type="button"
+          class="btn btn-sm btn-warning"
+          data-bs-container="body"
+          data-bs-toggle="popover"
+          data-bs-placement="top"
+          data-bs-content="OMG, are you serious you need me to hold your hand for this one?">instructions</button>
+      </button>
+          <button
+          id="restartBtn"
+          class="btn btn-sm btn-primary"
+        >
+          Restart
+        </button>
       </section>
 
       <!-- Modal2 -->
@@ -91,6 +111,7 @@
       ></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
       <script type="module" src="./scripts.js"></script>
     </main>

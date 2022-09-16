@@ -84,7 +84,7 @@ function declareWinner() {
 }
 function declareTie() {
   resetRound();
-  setEndgameModal("game tie!", `Well...Play again`);
+  setEndgameModal("game tie!", `It's a tie! Well...Play again`);
 }
 
 function setEndgameModal(query, text) {
