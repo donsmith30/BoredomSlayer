@@ -9,6 +9,9 @@ let isNum = false;
 let isDiff = false;
 let userClicked = false;
 let count = 0;
+let timerIdE = 0;
+let timerIdM = 0;
+let timerIdH = 0;
 
 function startUp() {
     console.log("startUp is firing");
@@ -85,22 +88,22 @@ function getRandom() {
     compArr.push(randomDivId);
     console.log(compArr);
     if(difficulty === 'EASY') {
-        const timerId = setTimeout(compareArrs, 16000);
-        if(userClicked === true) {
-            clearTimeout(timerId);
-        }
+        timerIdE = setTimeout(compareArrs, 16000);
+        // if(userClicked === true) {
+        //     clearTimeout(timerId);
+        // }
     }
     if(difficulty === 'MEDIUM') {
-        const timerId = setTimeout(compareArrs, 11000);
-        if(userClicked === true) {
-            clearTimeout(timerId);
-        }
+        timerIdM = setTimeout(compareArrs, 11000);
+        // if(userClicked === true) {
+        //     clearTimeout(timerId);
+        // }
     }
     if(difficulty === 'HARD') {
-        const timerId = setTimeout(compareArrs, 6000);
-        if(userClicked === true) {
-            clearTimeout(timerId);
-        }
+        timerIdH = setTimeout(compareArrs, 6000);
+        // if(userClicked === true) {
+        //     clearTimeout(timerId);
+        // }
     }
 }
 
@@ -123,7 +126,10 @@ function onUserClick(e) {
         if(userArr.length === compArr.length){
             compareArrs();
         }
-        userClicked = true;
+        clearTimeout(timerIdE);
+        clearTimeout(timerIdM);
+        clearTimeout(timerIdH);
+        // userClicked = true;
     }
 }
 
