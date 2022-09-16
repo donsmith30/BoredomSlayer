@@ -29,9 +29,9 @@ main {
 }
 
 .div_style {
-    
     border: 4px solid pink;
     width: fit-content;
+    height: fit-content;
     padding: 2px;
     margin: 2px;
     flex: 1 1 30%;

@@ -47,7 +47,6 @@ const routes = [
     path: "/triviaLoad",
     component: triviaComponent,
   },
-
   {
     path: "/memoryCards",
     component: cardsComponent,

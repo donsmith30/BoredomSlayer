@@ -261,6 +261,7 @@ async function setRoundModal(query, message) {
     modalDiv.find('img').attr('src', newPic);
     modalDiv.find('#modalSpan1').text(message);
     modalDiv.modal('show');
+    
     setTimeout(function() {modalDiv.modal('hide')}, 3000);
 }
 
