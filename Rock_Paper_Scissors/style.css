@@ -49,7 +49,6 @@ img:hover {
 }
 
 .first_row {
-    border: 5px solid red;
     text-align: center;
 }
 
@@ -58,7 +57,6 @@ img:hover {
 }
 
 .third_row {
-    border: 5px solid black;
     flex-wrap: wrap;
 }
 

@@ -2,6 +2,13 @@ const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 let numOfTurns = '';
+let compArr = [];
+let userArr = [];
+let difficulty = '';
+let isNum = false;
+let isDiff = false;
+let userClicked = false;
+let count = 0;
 
 function startUp() {
     console.log("startUp is firing");
@@ -19,10 +26,6 @@ function wireUpButtons() {
     $('section').on('mouseleave', randColor)
 }
 
-let compArr = [];
-let userArr = [];
-let difficulty = '';
-
 function onStartGame() {
     selectNumOfTurns();
     while(compArr.length === 0) {
@@ -30,11 +33,38 @@ function onStartGame() {
     }
 }
 
-function selectNumOfTurns() {
-    while(!Number.isInteger(numOfTurns)) {
-        numOfTurns = parseInt(prompt("Enter the number of rounds you'd like to play"), 10);
-        while( numOfTurns <= 0) {
-            numOfTurns = parseInt(prompt("Enter the number of rounds you'd like to play"), 10);
+async function selectNumOfTurns() {
+    const difficultyArr = ['EASY', 'MEDIUM', 'HARD'];
+    while(isNum === false) {
+        let value = prompt("Enter the number of rounds you'd like to play");
+        
+        if(value > 0 && value !== null) {
+            numOfTurns = parseInt(value, 10);
+            isNum = true;
+        }
+        else if(count === 0) {
+            count++;
+            alert("Invalid input. Try again")
+        }
+        else if(count === 1) {
+            count++;
+            alert("No seriously, input a valid value");
+        }
+        else if(count === 2) {
+            count++;
+            alert("Literally ANY number between 1 and infinity... in number form");
+        }
+        else {
+            alert("We can do this all day")
+        }
+    }
+    while(isDiff === false) {
+        let choice = prompt("Choose the difficulty. Pick either 'EASY', 'MEDIUM', or 'HARD'");
+        if(choice !== null) {
+            difficulty = choice.toUpperCase();
+            if(difficultyArr.includes(difficulty)) {
+                isDiff = true;
+            }
         }
     }
 }
@@ -43,6 +73,9 @@ function onStopGame() {
     compArr = [];
     userArr = [];
     numOfTurns = '';
+    isNum = false;
+    isDiff = false;
+    userClicked = false;
     alert("GameBoard Reset");
 }
 
@@ -51,6 +84,24 @@ function getRandom() {
     setTimeout(flash, 200, randomDivId);
     compArr.push(randomDivId);
     console.log(compArr);
+    if(difficulty === 'EASY') {
+        const timerId = setTimeout(compareArrs, 16000);
+        if(userClicked === true) {
+            clearTimeout(timerId);
+        }
+    }
+    if(difficulty === 'MEDIUM') {
+        const timerId = setTimeout(compareArrs, 11000);
+        if(userClicked === true) {
+            clearTimeout(timerId);
+        }
+    }
+    if(difficulty === 'HARD') {
+        const timerId = setTimeout(compareArrs, 6000);
+        if(userClicked === true) {
+            clearTimeout(timerId);
+        }
+    }
 }
 
 function compTurn() {
@@ -58,6 +109,7 @@ function compTurn() {
         const sequence = compArr[i];
         setTimeout(flash, i * 600, sequence, i);
     }
+    userClicked = false;
 }
 
 function onUserClick(e) {
@@ -71,6 +123,7 @@ function onUserClick(e) {
         if(userArr.length === compArr.length){
             compareArrs();
         }
+        userClicked = true;
     }
 }
 
