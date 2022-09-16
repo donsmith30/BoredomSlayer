@@ -7,8 +7,10 @@ let userArr = [];
 let difficulty = '';
 let isNum = false;
 let isDiff = false;
-let userClicked = false;
 let count = 0;
+let timerIdE = 0;
+let timerIdM = 0;
+let timerIdH = 0;
 
 function startUp() {
     console.log("startUp is firing");
@@ -75,7 +77,6 @@ function onStopGame() {
     numOfTurns = '';
     isNum = false;
     isDiff = false;
-    userClicked = false;
     alert("GameBoard Reset");
 }
 
@@ -85,22 +86,13 @@ function getRandom() {
     compArr.push(randomDivId);
     console.log(compArr);
     if(difficulty === 'EASY') {
-        const timerId = setTimeout(compareArrs, 16000);
-        if(userClicked === true) {
-            clearTimeout(timerId);
-        }
+        timerIdE = setTimeout(compareArrs, 16000);
     }
     if(difficulty === 'MEDIUM') {
-        const timerId = setTimeout(compareArrs, 11000);
-        if(userClicked === true) {
-            clearTimeout(timerId);
-        }
+        timerIdM = setTimeout(compareArrs, 11000);
     }
     if(difficulty === 'HARD') {
-        const timerId = setTimeout(compareArrs, 6000);
-        if(userClicked === true) {
-            clearTimeout(timerId);
-        }
+        timerIdH = setTimeout(compareArrs, 6000);
     }
 }
 
@@ -109,7 +101,6 @@ function compTurn() {
         const sequence = compArr[i];
         setTimeout(flash, i * 600, sequence, i);
     }
-    userClicked = false;
 }
 
 function onUserClick(e) {
@@ -123,7 +114,9 @@ function onUserClick(e) {
         if(userArr.length === compArr.length){
             compareArrs();
         }
-        userClicked = true;
+        clearTimeout(timerIdE);
+        clearTimeout(timerIdM);
+        clearTimeout(timerIdH);
     }
 }
 
