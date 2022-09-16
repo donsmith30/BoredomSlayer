@@ -24,19 +24,39 @@
       href="https://unpkg.com/@egjs/flicking/dist/flicking.css"
       crossorigin="anonymous"
     />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- local CSS -->
     <link rel="stylesheet" href="./style.css" />
   </head>
   <nav class="navbar navbar-dark bg-dark">
-    <button id="menuToggle" width="30" height="30">
+    <button id="menuToggle">
       <img
         src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/64/000000/external-video-game-esport-itim2101-lineal-color-itim2101.png"
       />
-      Menu
     </button>
+    <h3 id="navTitle" class="navbar-text">Boredom Slayer</h3>
+    <!-- <div class="navbar">
+      <img
+        id="avatar"
+        src="https://avatars.dicebear.com/api/bottts/:seed.svg"
+      />
+    </div> -->
   </nav>
+
   <body>
+    <video autoplay muted loop id="backgroundVideo">
+      <source
+        src="https://media.istockphoto.com/videos/meteor-shower-4k-resolution-video-id1328977934"
+        type="video/mp4"
+      />
+    </video>
     <div id="app">
       <div id="carousel" class="flicking-viewport">
         <!-- Camera element -->
