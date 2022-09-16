@@ -48,10 +48,17 @@ section{
 } 
 #instruct{
   background-color: rgb(255, 174, 0);
-  font-size: 100%;
   width: 150px;
   height: 50px;
   border: 4px solid;
   border-radius: 15px;
   cursor: pointer;
+}
+
+.btn {
+  text-align: center;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 2px;
+  font-size: small;
 }

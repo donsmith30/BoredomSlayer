@@ -24,6 +24,9 @@ const cardsComponent = {
 const kanyeComponent = {
   template: '<iframe src="./Kanye_Says/index.html"></iframe>',
 };
+const snakeComponent = {
+  template: '<iframe src="./snake/index.html"></iframe>'
+}
 
 // Router map for defining components
 const routes = [
@@ -54,6 +57,10 @@ const routes = [
   {
     path: "/kanyeSays",
     component: kanyeComponent,
+  },
+  {
+    path: "/snake",
+    component: snakeComponent,
   },
 ];
 

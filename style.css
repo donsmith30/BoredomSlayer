@@ -72,6 +72,12 @@ iframe {
   background-position: center;
 }
 
+.snake {
+  background-image: url("https://cdn.pixabay.com/photo/2015/02/28/15/25/speckled-rattlesnake-653642__340.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 #menuToggle {
   width: 40;
   height: 40;
